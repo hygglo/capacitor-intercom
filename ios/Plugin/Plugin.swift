@@ -6,7 +6,7 @@ import Intercom
  * Please read the Capacitor iOS Plugin Development Guide
  * here: https://capacitor.ionicframework.com/docs/plugins/ios
  */
-@objc(IntercomPlugin)
+@objc(Intercom)
 public class IntercomPlugin: CAPPlugin {
   
   public override func load() {
@@ -167,5 +167,16 @@ public class IntercomPlugin: CAPPlugin {
         call.reject("Enter a value for padding bottom")
       }
   }
+    
+  @objc func sendPushTokenToIntercom(_ call: CAPPluginCall) {
+    call.reject("Not implemented on iOS");
+  }
+
+  @objc func handlePush(_ call: CAPPluginCall) {
+    call.reject("Not implemented on iOS");
+  }
   
+  @objc func isIntercomPush(_ call: CAPPluginCall) {
+    call.reject("Not implemented on iOS");
+  }
 }

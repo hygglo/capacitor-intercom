@@ -85,7 +85,7 @@ PushNotifications.register()
  * Register an indetified user
  */
 Intercom
-  .registerIdentifiedUser({ userId: 123456 }) // or email or both
+  .registerIdentifiedUser({ userId: 123456, email: "email@domain.com" })
 
 /**
  * Register a log event

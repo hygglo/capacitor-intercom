@@ -65,40 +65,76 @@ npx cap sync
 - setBottomPadding
 - sendPushTokenToIntercom
 - handlePush
-- isIntercomPush
+- sendPushTokenToIntercom
+- receivePush
 
 ## Usage
 
 ```js
 import { Intercom } from "@capacitor-community/intercom";
-const intercom = new Intercom();
+import { PushNotifications } from "@capacitor/push-notifications";
 
-import { PushNotifications } from "@capacitor//push-notifications";
-
-//
-// Register for push notifications from Intercom
+/**
+ * Register for push notifications from Intercom
+ */
 PushNotifications.register()
 
-//
-// Register an indetified user
-intercom
+/**
+ * Register an indetified user
+ */
+Intercom
   .registerIdentifiedUser({ userId: 123456 }) // or email or both
 
-//
-// Register a log event
-intercom
+/**
+ * Register a log event
+ */
+Intercom
   .logEvent({ name: "my-event", data: { pi: 3.14 } })
 
-//
-// Display the message composer
-intercom
+/**
+ * Display the message composer
+ */
+Intercom
   .displayMessageComposer({ message: "Hello there!" } })
 
-//
-// Identity Verification
-// https://developers.intercom.com/installing-intercom/docs/ios-identity-verification
-intercom
+/**
+ * Identity Verification
+ * https://developers.intercom.com/installing-intercom/docs/ios-identity-verification
+ */
+Intercom
   .setUserHash({ hmac: "xyz" } })
+
+
+//////////////////////////////////////////////
+// To receive push notifications in Android you'll have to send push token to Intercom
+// and start listening received notifications in PushNotifications plugin:
+//////////////////////////////////////////////
+
+/**
+ * Register Push notification listener for "registration" action
+ * to send push token to Intercom in Android devices
+ * 
+ * Only for Android
+ */
+PushNotifications.addListener('registration', async ({ value }) => {
+  // Send token to Intercom if platform is Android
+  if (Capacitor.getPlatform() === 'android') {
+    Intercom.sendPushTokenToIntercom({ value })
+  }
+})
+
+/**
+ * Register Push notification listener for "pushNotificationReceived" handler
+ * to check if push is from Intercom and handle it their way
+ * 
+ * Only for Android
+ */
+PushNotifications.addListener('pushNotificationReceived', (notification) => {
+  // Handle push received in Intercom if platform is Android and push notification is coming from Intercom
+  if (Capacitor.getPlatform() === 'android') {
+    Intercom.receivePush(notification.data)
+  }
+})
 ```
 
 ## iOS setup
@@ -143,7 +179,8 @@ intercom
   "plugins": {
    "IntercomPlugin": {
       "android-apiKey": "android_sdk-xxx",
-      "android-appId": "yyy"
+      "android-appId": "yyy",
+      "android-senderId": "123"
     }
   }
 …
@@ -151,16 +188,6 @@ intercom
 ```
 
 - `npx cap open android`
-- `[extra step]` in android case we need to tell Capacitor to initialise the plugin:
-
-### Capacitor v2:
-> on your `MainActivity.java` file add `import com.getcapacitor.community.intercom.IntercomPlugin;` and then inside the init callback `add(IntercomPlugin.class);`
-
-### Capacitor v3:
-> on your `MainActivity.java` file add `import com.getcapacitor.community.intercom.IntercomPlugin;` and then inside the init callback `registerPlugin(IntercomPlugin.class);`
-[More information](https://capacitorjs.com/docs/updating/3-0#switch-to-automatic-android-plugin-loading)
-
-Now you should be set to go. Try to run your client using `ionic cap run android --livereload`.
 
 > Tip: every time you change a native code you may need to clean up the cache (Build > Clean Project | Build > Rebuild Project) and then run the app again.
 

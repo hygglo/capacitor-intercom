@@ -19,6 +19,7 @@ import io.intercom.android.sdk.IntercomPushManager;
 import io.intercom.android.sdk.UserAttributes;
 import io.intercom.android.sdk.identity.Registration;
 import io.intercom.android.sdk.push.IntercomPushClient;
+import io.intercom.android.sdk.carousel.CarouselView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -213,6 +214,13 @@ public class IntercomPlugin extends Plugin {
         intercomPushClient.sendTokenToIntercom(this.bridge.getActivity().getApplication(), token);
         JSObject ret = new JSObject();
         ret.put("token", token);
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void displayCarousell(PluginCall call) {
+        String carousell = call.getString("id");
+        Intercom.client().displayCarousel(carousell);
         call.resolve();
     }
 

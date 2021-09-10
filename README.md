@@ -69,6 +69,7 @@ npx cap sync
 - handlePush
 - sendPushTokenToIntercom
 - receivePush
+- displayCarousell
 
 ## Usage
 
@@ -105,6 +106,14 @@ Intercom
  */
 Intercom
   .setUserHash({ hmac: "xyz" } })
+
+
+/**
+ * Launch mobile carousels 
+ * https://www.intercom.com/help/en/articles/4605339-launch-mobile-carousels-from-a-button-in-your-mobile-app
+ */
+Intercom
+  .displayCarousell({ id: "123456" } })
 
 
 //////////////////////////////////////////////

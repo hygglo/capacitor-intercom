@@ -30,14 +30,16 @@ We're starting fresh under an official org. If you were using the previous npm p
 
 Using npm:
 
+~~npm install @capacitor-community/intercom~~
 ```bash
-npm install @capacitor-community/intercom
+npm install https://github.com/Fiksuruoka-fi/capacitor-intercom --save
 ```
 
 Using yarn:
 
+~~yarn add @capacitor-community/intercom~~
 ```bash
-yarn add @capacitor-community/intercom
+yarn add https://github.com/Fiksuruoka-fi/capacitor-intercom
 ```
 
 Sync native files:

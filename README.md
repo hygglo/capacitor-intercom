@@ -161,7 +161,7 @@ PushNotifications.addListener('pushNotificationReceived', (notification) => {
 {
  …
   "plugins": {
-   "IntercomPlugin": {
+   "Intercom": {
       "ios-apiKey": "ios_sdk-xxx",
       "ios-appId": "yyy"
     }
@@ -188,7 +188,7 @@ PushNotifications.addListener('pushNotificationReceived', (notification) => {
 {
  …
   "plugins": {
-   "IntercomPlugin": {
+   "Intercom": {
       "android-apiKey": "android_sdk-xxx",
       "android-appId": "yyy",
       "android-senderId": "123"

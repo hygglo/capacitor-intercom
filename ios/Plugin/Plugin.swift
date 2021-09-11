@@ -181,7 +181,6 @@ public class IntercomPlugin: CAPPlugin {
   }
 
   @objc func displayCarousell(_ call: CAPPluginCall) {
-
     let carousell = call.getString("id")
     
     if (carousell != nil) {
@@ -191,6 +190,5 @@ public class IntercomPlugin: CAPPlugin {
     }else{
         call.reject("No carousell id found.")
     }
-
   }
 }

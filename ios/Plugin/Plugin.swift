@@ -185,7 +185,7 @@ public class IntercomPlugin: CAPPlugin {
     let carousell = call.getString("id")
     
     if (carousell != nil) {
-      Intercom.presentCarousel(carousell)
+      Intercom.presentCarousel(carousell!)
         call.resolve()
       print("carousell id sent to intercom")
     }else{

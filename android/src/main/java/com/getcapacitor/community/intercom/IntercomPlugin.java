@@ -55,92 +55,124 @@ public class IntercomPlugin extends Plugin {
 
     @PluginMethod
     public void registerIdentifiedUser(PluginCall call) {
-        String email = call.getString("email");
-        String userId = call.getString("userId");
+        try {
+            String email = call.getString("email");
+            String userId = call.getString("userId");
 
-        Registration registration = new Registration();
+            Registration registration = new Registration();
 
-        if (email != null && email.length() > 0) {
-            registration = registration.withEmail(email);
+            if (email != null && email.length() > 0) {
+                registration = registration.withEmail(email);
+            }
+            if (userId != null && userId.length() > 0) {
+                registration = registration.withUserId(userId);
+            }
+            Intercom.client().registerIdentifiedUser(registration);
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
         }
-        if (userId != null && userId.length() > 0) {
-            registration = registration.withUserId(userId);
-        }
-        Intercom.client().registerIdentifiedUser(registration);
-        call.resolve();
     }
 
     @PluginMethod
     public void registerUnidentifiedUser(PluginCall call) {
-        Intercom.client().registerUnidentifiedUser();
-        call.resolve();
+        try {
+            Intercom.client().registerUnidentifiedUser();
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void updateUser(PluginCall call) {
-        UserAttributes.Builder builder = new UserAttributes.Builder();
-        String userId = call.getString("userId");
-        if (userId != null && userId.length() > 0) {
-            builder.withUserId(userId);
+        try {
+            UserAttributes.Builder builder = new UserAttributes.Builder();
+            String userId = call.getString("userId");
+            if (userId != null && userId.length() > 0) {
+                builder.withUserId(userId);
+            }
+            String email = call.getString("email");
+            if (email != null && email.length() > 0) {
+                builder.withEmail(email);
+            }
+            String name = call.getString("name");
+            if (name != null && name.length() > 0) {
+                builder.withName(name);
+            }
+            String phone = call.getString("phone");
+            if (phone != null && phone.length() > 0) {
+                builder.withPhone(phone);
+            }
+            String languageOverride = call.getString("languageOverride");
+            if (languageOverride != null && languageOverride.length() > 0) {
+                builder.withLanguageOverride(languageOverride);
+            }
+            Map<String, Object> customAttributes = mapFromJSON(call.getObject("customAttributes"));
+            builder.withCustomAttributes(customAttributes);
+            Intercom.client().updateUser(builder.build());
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
         }
-        String email = call.getString("email");
-        if (email != null && email.length() > 0) {
-            builder.withEmail(email);
-        }
-        String name = call.getString("name");
-        if (name != null && name.length() > 0) {
-            builder.withName(name);
-        }
-        String phone = call.getString("phone");
-        if (phone != null && phone.length() > 0) {
-            builder.withPhone(phone);
-        }
-        String languageOverride = call.getString("languageOverride");
-        if (languageOverride != null && languageOverride.length() > 0) {
-            builder.withLanguageOverride(languageOverride);
-        }
-        Map<String, Object> customAttributes = mapFromJSON(call.getObject("customAttributes"));
-        builder.withCustomAttributes(customAttributes);
-        Intercom.client().updateUser(builder.build());
-        call.resolve();
     }
 
     @PluginMethod
     public void logout(PluginCall call) {
-        Intercom.client().logout();
-        call.resolve();
+        try {
+            Intercom.client().logout();
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void logEvent(PluginCall call) {
-        String eventName = call.getString("name");
-        Map<String, Object> metaData = mapFromJSON(call.getObject("data"));
+        try {
+            String eventName = call.getString("name");
+            Map<String, Object> metaData = mapFromJSON(call.getObject("data"));
 
-        if (metaData == null) {
-            Intercom.client().logEvent(eventName);
-        } else {
-            Intercom.client().logEvent(eventName, metaData);
+            if (metaData == null) {
+                Intercom.client().logEvent(eventName);
+            } else {
+                Intercom.client().logEvent(eventName, metaData);
+            }
+
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
         }
-
-        call.resolve();
     }
 
     @PluginMethod
     public void displayMessenger(PluginCall call) {
-        Intercom.client().displayMessenger();
-        call.resolve();
+        try {
+            Intercom.client().displayMessenger();
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void displayMessageComposer(PluginCall call) {
-        Intercom.client().displayMessageComposer();
-        call.resolve();
+        try {
+            Intercom.client().displayMessageComposer();
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void displayHelpCenter(PluginCall call) {
-        Intercom.client().displayHelpCenter();
-        call.resolve();
+        try {
+            Intercom.client().displayHelpCenter();
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
@@ -150,47 +182,75 @@ public class IntercomPlugin extends Plugin {
 
     @PluginMethod
     public void displayLauncher(PluginCall call) {
-        Intercom.client().setLauncherVisibility(Intercom.VISIBLE);
-        call.resolve();
+        try {
+            Intercom.client().setLauncherVisibility(Intercom.VISIBLE);
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void hideLauncher(PluginCall call) {
-        Intercom.client().setLauncherVisibility(Intercom.GONE);
-        call.resolve();
+        try {
+            Intercom.client().setLauncherVisibility(Intercom.GONE);
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void hideIntercom(PluginCall call) {
-        Intercom.client().hideIntercom();
-        call.resolve();
+        try {
+            Intercom.client().hideIntercom();
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void displayInAppMessages(PluginCall call) {
-        Intercom.client().setInAppMessageVisibility(Intercom.VISIBLE);
-        call.resolve();
+        try {
+            Intercom.client().setInAppMessageVisibility(Intercom.VISIBLE);
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void hideInAppMessages(PluginCall call) {
-        Intercom.client().setLauncherVisibility(Intercom.GONE);
-        call.resolve();
+        try {
+            Intercom.client().setLauncherVisibility(Intercom.GONE);
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void setUserHash(PluginCall call) {
-        String hmac = call.getString("hmac");
-        Intercom.client().setUserHash(hmac);
-        call.resolve();
+        try {
+            String hmac = call.getString("hmac");
+            Intercom.client().setUserHash(hmac);
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod
     public void setBottomPadding(PluginCall call) {
-        String stringValue = call.getString("value");
-        int value = Integer.parseInt(stringValue);
-        Intercom.client().setBottomPadding(value);
-        call.resolve();
+        try {
+            String stringValue = call.getString("value");
+            int value = Integer.parseInt(stringValue);
+            Intercom.client().setBottomPadding(value);
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
     }
 
     @PluginMethod

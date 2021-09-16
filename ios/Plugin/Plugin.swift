@@ -187,8 +187,8 @@ public class IntercomPlugin: CAPPlugin {
       Intercom.presentCarousel(carousell!)
         call.resolve()
       print("carousell id sent to intercom")
-    }else{
-        call.reject("No carousell id found.")
+    } else {
+        call.reject("Carousell id not found.", "NOT_FOUND")
     }
   }
 }

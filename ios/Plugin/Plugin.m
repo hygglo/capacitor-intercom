@@ -9,7 +9,7 @@ CAP_PLUGIN(IntercomPlugin, "Intercom",
            CAP_PLUGIN_METHOD(updateUser, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(logout, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(logEvent, CAPPluginReturnPromise);
-           CAP_PLUGIN_METHOD(presentArticle, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(displayArticle, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(displayMessenger, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(displayMessageComposer, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(displayHelpCenter, CAPPluginReturnPromise);

@@ -93,6 +93,15 @@ public class IntercomPlugin: CAPPlugin {
     
     call.resolve()
   }
+
+   @objc func displayArticle(_ call: CAPPluginCall) {
+    guard let articleId = call.getString("articleId") else {
+        call.reject("Enter an articleId")
+      return
+    }
+    Intercom.displayArticle(articleId);
+    call.resolve()
+  }
   
   @objc func displayMessenger(_ call: CAPPluginCall) {
     Intercom.presentMessenger();

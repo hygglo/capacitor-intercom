@@ -4,6 +4,7 @@ export interface IntercomPlugin {
     updateUser(options: UserUpdateOptions): Promise<void>;
     logout(): Promise<void>;
     logEvent(options: LogEventOptions): Promise<void>;
+    displayArticle(options: DisplayArticleOptions): Promise<void>;
     displayMessenger(): Promise<void>;
     displayMessageComposer(options: DisplayMessageComposerOptions): Promise<void>;
     displayHelpCenter(): Promise<void>;
@@ -52,6 +53,9 @@ export interface DisplayMessageComposerOptions {
 }
 export interface SetUserHashOptions {
     hmac: string;
+}
+export interface DisplayArticleOptions {
+    articleId: string;
 }
 export interface SetBottomPaddingOptions {
     value: string;

@@ -147,6 +147,17 @@ public class IntercomPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void displayArticle(PluginCall call) {
+        try {
+            String articleId = call.getString("articleId");
+            Intercom.client().displayArticle(articleId);
+            call.resolve();
+        } catch (Exception e) {
+            call.reject(e.getMessage());
+        }
+    }
+
+    @PluginMethod
     public void displayMessenger(PluginCall call) {
         try {
             Intercom.client().displayMessenger();
@@ -159,7 +170,8 @@ public class IntercomPlugin extends Plugin {
     @PluginMethod
     public void displayMessageComposer(PluginCall call) {
         try {
-            Intercom.client().displayMessageComposer();
+            String message = call.getString("message");
+            Intercom.client().displayMessageComposer(message);
             call.resolve();
         } catch (Exception e) {
             call.reject(e.getMessage());

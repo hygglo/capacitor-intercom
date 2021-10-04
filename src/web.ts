@@ -36,6 +36,10 @@ export class IntercomWeb extends WebPlugin implements IntercomPlugin {
     throw this.unimplemented('Not implemented on web.');
   }
 
+  async displayArticle(): Promise<void> {
+    throw this.unimplemented('Not implemented on web.');
+  }
+
   async displayMessenger(): Promise<void> {
     throw this.unimplemented('Not implemented on web.');
   }

@@ -21,6 +21,9 @@ var capacitorPlugin = (function (exports, core) {
         async logEvent(_options) {
             throw this.unimplemented('Not implemented on web.');
         }
+        async displayArticle() {
+            throw this.unimplemented('Not implemented on web.');
+        }
         async displayMessenger() {
             throw this.unimplemented('Not implemented on web.');
         }
@@ -60,7 +63,7 @@ var capacitorPlugin = (function (exports, core) {
         async receivePush(_notification) {
             throw this.unimplemented('Not implemented on web.');
         }
-        async displayCarousell(_notification) {
+        async displayCarousell(_options) {
             throw this.unimplemented('Not implemented on web.');
         }
     }
@@ -76,5 +79,5 @@ var capacitorPlugin = (function (exports, core) {
 
     return exports;
 
-}({}, capacitorExports));
+})({}, capacitorExports);
 //# sourceMappingURL=plugin.js.map

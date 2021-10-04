@@ -6,6 +6,7 @@ export declare class IntercomWeb extends WebPlugin implements IntercomPlugin {
     updateUser(_options: UserUpdateOptions): Promise<void>;
     logout(): Promise<void>;
     logEvent(_options: LogEventOptions): Promise<void>;
+    displayArticle(): Promise<void>;
     displayMessenger(): Promise<void>;
     displayMessageComposer(_options: DisplayMessageComposerOptions): Promise<void>;
     displayHelpCenter(): Promise<void>;

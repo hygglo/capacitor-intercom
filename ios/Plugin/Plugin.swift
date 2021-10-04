@@ -99,7 +99,7 @@ public class IntercomPlugin: CAPPlugin {
         call.reject("Enter an articleId")
       return
     }
-    Intercom.displayArticle(articleId);
+    Intercom.presentArticle(articleId);
     call.resolve()
   }
   

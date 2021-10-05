@@ -293,7 +293,7 @@ public class IntercomPlugin extends Plugin {
     public void displayCarousell(PluginCall call) {
         String carousell = call.getString("id");
         if (carousell.isEmpty()) {
-                return call.reject("Carousell id can't be empty.");
+                call.reject("Carousell id can't be empty.");
         }
 
         try { 

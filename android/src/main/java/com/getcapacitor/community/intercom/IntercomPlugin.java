@@ -32,6 +32,7 @@ import org.json.JSONObject;
 @CapacitorPlugin(name = "Intercom", permissions = @Permission(strings = {}, alias = "receive"))
 public class IntercomPlugin extends Plugin {
     private final IntercomPushClient intercomPushClient = new IntercomPushClient();
+    public static final String CONFIG_KEY_PREFIX = "plugins.IntercomPlugin.android-";
 
     @Override
     public void load() {
@@ -307,13 +308,10 @@ public class IntercomPlugin extends Plugin {
     private void setUpIntercom() {
         try {
             // get config
-            CapConfig config = this.bridge.getConfig();
-            String apiKey = config.getPluginConfiguration("Intercom").getString("android-apiKey");
-            String appId = config.getPluginConfiguration("Intercom").getString("android-appId");
-            String senderId = config.getPluginConfiguration("Intercom").getString("android-senderId");
 
+          String apiKey = this.bridge.getConfig().getString(CONFIG_KEY_PREFIX + "apiKey", "ADD_IN_CAPACITOR_CONFIG_JSON");
+          String appId = this.bridge.getConfig().getString(CONFIG_KEY_PREFIX + "appId", "ADD_IN_CAPACITOR_CONFIG_JSON");
             // init intercom sdk
-            IntercomPushManager.cacheSenderId(this.bridge.getContext(), senderId);
             Intercom.initialize(this.getActivity().getApplication(), apiKey, appId);
         } catch (Exception e) {
             Logger.error("Intercom", "ERROR: Something went wrong when initializing Intercom. Check your configurations", e);

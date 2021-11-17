@@ -12,8 +12,9 @@ public class IntercomPlugin: CAPPlugin {
   public override func load() {
     let apiKey = getConfigValue("ios-apiKey") as? String ?? "ADD_IN_CAPACITOR_CONFIG_JSON"
     let appId = getConfigValue("ios-appId") as? String ?? "ADD_IN_CAPACITOR_CONFIG_JSON"
+
+    print(apiKey, appId)
     Intercom.setApiKey(apiKey, forAppId: appId)
-    
     NotificationCenter.default.addObserver(self, selector: #selector(self.didRegisterWithToken(notification:)), name: Notification.Name.capacitorDidRegisterForRemoteNotifications, object: nil)
   }
   
